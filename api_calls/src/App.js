@@ -10,6 +10,7 @@ import styled from 'styled-components'
 
 function App({isLoading, error, data, fetchData}) {
     const [url, setUrl] = useState('https://api.openbrewerydb.org/breweries');
+    const [storedURL, setStoredURL] = useState('');
     const [id, setID] = useState(3000);
     
     useEffect(() => {
@@ -20,8 +21,8 @@ function App({isLoading, error, data, fetchData}) {
         <div className="App">
             {isLoading && <Loading>Fetching your breweries...</Loading>}
             {error && <Error>Something was brewed wrong...try again</Error>}
-            <Route exact path='/' render={props => <HomePage setUrl={setUrl} data={data} setID={setID} />} />
-            <Route path={`/${id}`} render={props => <BreweryPage data={data} setUrl={setUrl}/>} />
+            <Route exact path='/' render={props => <HomePage setUrl={setUrl} data={data} setID={setID} setStoredURL={setStoredURL}/>} />
+            <Route path={`/${id}`} render={props => <BreweryPage data={data} setUrl={setUrl} storedURL={storedURL}/>} />
         </div>
     );
 }

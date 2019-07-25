@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
-const Search = ({setUrl}) => {
+const Search = ({setUrl, setStoredURL}) => {
     const [input, setInput] = useState('');
-    useEffect(() => {
-        setUrl(`https://api.openbrewerydb.org/breweries/autocomplete?query=${input}`)
-    }, [input, setUrl]);
+
+    const changeURL = (e) =>{
+        e.preventDefault();
+        setInput(e.target.value)
+        let url = `https://api.openbrewerydb.org/breweries/autocomplete?query=${e.target.value}`
+        setUrl(url)
+        setStoredURL(url)
+    }
     
     return (
         <Form onSubmit={(e) => e.preventDefault()}>
@@ -17,7 +22,7 @@ const Search = ({setUrl}) => {
                 text='text'
                 name='search'
                 value={input}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={(e) => changeURL(e)}
             />
         </Form>
     )

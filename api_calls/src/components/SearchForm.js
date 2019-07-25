@@ -23,6 +23,7 @@ const SearchForm = (props) => {
         for(let key in params)
             url=`${url}by_${key}=${params[key]}&`
         props.setUrl(url)
+        props.setStoredURL(url)
         setInput({city: '', state: '', type: ''})
     }
     return (

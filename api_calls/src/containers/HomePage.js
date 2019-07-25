@@ -3,13 +3,13 @@ import Search from '../components/Search'
 import SearchForm from '../components/SearchForm'
 import Breweries from '../components/Breweries'
 
-const HomePage = ({setUrl, data, setID}) => {
+const HomePage = ({setUrl, data, setID, setStoredURL}) => {
     return(
         <>
             <h1>Search for a brewery near you!</h1>
-            <Search setUrl={setUrl} />
-            <SearchForm setUrl={setUrl}/>
-            <Breweries breweries={data} setID={setID} setUrl={setUrl} />
+            <Search setUrl={setUrl} setStoredURL={setStoredURL} />
+            <SearchForm setUrl={setUrl} setStoredURL={setStoredURL}/>
+            <Breweries breweries={data} setID={setID} setUrl={setUrl}  />
         </>
         )
 }
