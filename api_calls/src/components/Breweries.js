@@ -22,7 +22,7 @@ const Breweries = ({breweries, setID, setUrl}) => {
 
 export default Breweries
 
-const BreweriesDiv = styled.div`
+export const BreweriesDiv = styled.div`
     background: #1e784f;
     border-radius: 10px;
     padding: 20px 0;
