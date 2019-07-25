@@ -6,7 +6,6 @@ export const FETCH_ERROR = 'FETCH_ERROR'
 
 
 export const fetchData = (url) => dispatch => {
-    
     dispatch({type: FETCH_START})
     axios
         .get(url)

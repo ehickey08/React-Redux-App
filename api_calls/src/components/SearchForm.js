@@ -21,6 +21,7 @@ const SearchForm = (props) => {
         for(let key in params)
             url=`${url}by_${key}=${params[key]}&`
         props.setUrl(url)
+        setInput({city: '', state: '', type: ''})
     }
     return (
         <form onSubmit={(e)=>newSearch(e)}>

@@ -1,4 +1,5 @@
 export const states = [
+    {abbreviation: '', name: ''},
     {abbreviation: "AL", name: "Alabama"},
     {abbreviation: "AK", name: "Alaska"},
     {abbreviation: "AZ", name: "Arizona"},
@@ -53,6 +54,7 @@ export const states = [
 ]
 
 export const types = [
+    '',
     'Micro',
     'Regional',
     'Brewpub',

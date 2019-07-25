@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import { fetchData } from './actions/actions'
-
-import SearchForm from './components/SearchForm'
+import { Route, NavLink } from 'react-router-dom'
+import HomePage from './containers/HomePage'
+import BreweryPage from './containers/BreweryPage'
 import './App.css';
 
 function App({isLoading, error, data, fetchData}) {
     const [url, setUrl] = useState('https://api.openbrewerydb.org/breweries');
-    console.log(data)
+    const [id, setID] = useState(3000);
+    
     useEffect(() => {
         fetchData(url)
-    }, [url])
+    }, [url, fetchData])
 
     return (
         <div className="App">
-            <h1>Search for a brewery near you!</h1>
-            <SearchForm setUrl={setUrl}/>
+            {isLoading && <h3>Fetching your breweries...</h3>}
+            {error && <h4>Something was brewed wrong...try again</h4>}
+            <Route exact path='/' render={props => <HomePage setUrl={setUrl} data={data} setID={setID} />} />
+            <Route path={`/${id}`} render={props => <BreweryPage data={data} setUrl={setUrl}/>} />
         </div>
     );
 }
