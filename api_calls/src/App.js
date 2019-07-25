@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import { fetchData } from './actions/actions'
+
+import SearchForm from './components/SearchForm'
 import './App.css';
 
 function App({isLoading, error, data, fetchData}) {
-    console.log(isLoading, error, data)
-    const [url, setUrl] = useState('https://jobs.github.com/positions.json?page=1&search=code');
+    const [url, setUrl] = useState('https://api.openbrewerydb.org/breweries');
+    console.log(data)
     useEffect(() => {
         fetchData(url)
     }, [url])
+
     return (
         <div className="App">
-        
-        
+            <h1>Search for a brewery near you!</h1>
+            <SearchForm setUrl={setUrl}/>
         </div>
     );
 }
