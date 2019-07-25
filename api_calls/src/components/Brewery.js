@@ -1,11 +1,11 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-
+import styled from 'styled-components'
 const Brewery = ({brewery, setID, setUrl}) => {
     
     return (
-        <div>
-            <NavLink 
+        <div style={{padding: '5px'}}>
+            <NavLinker 
                 to={`/${brewery.id}`} 
                 onClick={() => {
                     setID(brewery.id)
@@ -14,9 +14,18 @@ const Brewery = ({brewery, setID, setUrl}) => {
             }
             >
             {brewery.name}
-            </NavLink>
+            </NavLinker>
         </div>
     )
 }
 
 export default Brewery
+
+export const NavLinker = styled(NavLink)`
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
+`

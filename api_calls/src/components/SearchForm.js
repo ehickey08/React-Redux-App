@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { states, types } from '../data/states'
+import { Form, Input, FormTitle } from './Search'
+import styled from 'styled-components'
 
 const SearchForm = (props) => {
     const [input, setInput] = useState({city: '', state: '', type: ''});
@@ -24,36 +26,69 @@ const SearchForm = (props) => {
         setInput({city: '', state: '', type: ''})
     }
     return (
-        <form onSubmit={(e)=>newSearch(e)}>
-            <input 
+        <Form onSubmit={(e)=>newSearch(e)}>
+            <div>
+                <FormTitle>Or search by city, state, and/or type of brewery:</FormTitle>
+            </div>
+            <div>
+            <Label>City: </Label>
+            <Input 
                 type='text'
                 name='city'
                 value = {input.city}
                 onChange = {handleChanges}
             />
-            <select
+            </div>
+            <div>
+            <Label>State:</Label>
+            <Select
+                as='select'
                 autoComplete="true"
                 name='state'
                 value = {input.state}
                 onChange = {handleChanges}
             >
                 {states.map(state => <option key ={state.name} value={state.name.toLowerCase()}>{state.abbreviation}</option>)}
-            </select>
-            <select
+            </Select>
+            </div>
+            <div>
+            <Label>Type:</Label>
+            <Select
+                as="select"
                 autoComplete ="true"
                 name='type'
                 value={input.type}
                 onChange = {handleChanges}
             >
                 {types.map(type => <option key={type} value={type.toLowerCase()}>{type}</option>)}
-            </select>
-            
-            <input 
+            </Select>
+            </div>
+            <InputButton 
                 type="submit"
                 onSubmit={(e)=>newSearch(e)}
             />
-        </form>
+        </Form>
     )
 }
 
 export default SearchForm
+
+const Select = styled(Input)`
+    text-align-last: center;
+`
+
+const Label = styled.label`
+    float: left;
+    width: 200px;
+    margin-top: 15px;
+`
+
+const InputButton = styled(Input)`
+    background: papayawhip;
+    color: palevioletred;
+
+    &:hover{
+        background: palevioletred;
+        color: papayawhip;
+    }
+`

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
+import { Route } from 'react-router-dom'
+
 import { fetchData } from './actions/actions'
-import { Route, NavLink } from 'react-router-dom'
 import HomePage from './containers/HomePage'
 import BreweryPage from './containers/BreweryPage'
 import './App.css';
+import styled from 'styled-components'
 
 function App({isLoading, error, data, fetchData}) {
     const [url, setUrl] = useState('https://api.openbrewerydb.org/breweries');
@@ -16,8 +18,8 @@ function App({isLoading, error, data, fetchData}) {
 
     return (
         <div className="App">
-            {isLoading && <h3>Fetching your breweries...</h3>}
-            {error && <h4>Something was brewed wrong...try again</h4>}
+            {isLoading && <Loading>Fetching your breweries...</Loading>}
+            {error && <Error>Something was brewed wrong...try again</Error>}
             <Route exact path='/' render={props => <HomePage setUrl={setUrl} data={data} setID={setID} />} />
             <Route path={`/${id}`} render={props => <BreweryPage data={data} setUrl={setUrl}/>} />
         </div>
@@ -35,3 +37,12 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
+
+const Loading = styled.h3`
+    font-size: 20px;
+    color: blue;
+`
+
+const Error = styled(Loading)`
+    color: red
+`
